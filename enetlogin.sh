@@ -15,7 +15,7 @@ do
 		eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=$routerip&wlanacip=$authip"
 		execution=$(curl --silent --cookie-jar cascookies -L "$eneturl" | grep -P -o '(?<=name="execution" value=").*(?="/><input type="hidden" name="_eventId)')
 		
-		curl --silent --output /dev/null --cookie cascookies --cookie-jar cascookies --insecure -H "Content-Type: application/x-www-form-urlencoded" -L -X POST "$loginurl" --data "username=$username&password=$password&execution=$execution&_eventId=submit&geolocation="
+		curl --silent --output /dev/null --cookie cascookies --cookie-jar cascookies -H "Content-Type: application/x-www-form-urlencoded" -L -X POST "$loginurl" --data "username=$username&password=$password&execution=$execution&_eventId=submit&geolocation="
 	else
 		echo "Connected to Internet, recheck a second later"
 	fi
