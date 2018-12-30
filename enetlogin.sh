@@ -7,7 +7,7 @@ while [ true ]
 do
 	ret_code=`curl -I -s --connect-timeout 5 http://www.baidu.com -w %{http_code} | tail -n1`
 
-	if [ "x$ret_code" != "x200" ] ; then
+	if [ $ret_code -ne 200 ] ; then
 		echo "Attempting to log in the enet system"
 		rm -f /tmp/cascookie
 
