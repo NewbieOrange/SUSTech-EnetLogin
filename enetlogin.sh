@@ -1,5 +1,5 @@
 loginurl="https://cas.sustech.edu.cn/cas/login"
-authip="219.134.142.194
+authip="219.134.142.194"
 username="YOUR_USER_NAME_HERE"
 password="YOUR_PASSWORD_HERE"
 
