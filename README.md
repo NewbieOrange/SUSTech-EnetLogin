@@ -10,4 +10,4 @@ A router with openwrt/LEDE installed, and a few linux skills.
 3. Enjoy the Internet without annoyances ~
 
 Please note that if you are using a custom DNS server, you need
-to add "172.18.1.51 cas.sustc.edu.cn" to the hosts file.
+to add "172.18.1.51 cas.sustech.edu.cn" to the hosts file.
