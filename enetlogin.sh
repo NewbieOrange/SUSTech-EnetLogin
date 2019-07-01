@@ -1,5 +1,6 @@
 loginurl="https://cas.sustech.edu.cn/cas/login"
 authip="219.134.142.194"
+# Insert your CAS info below:
 username="YOUR_USER_NAME_HERE"
 password="YOUR_PASSWORD_HERE"
 
@@ -11,6 +12,7 @@ do
 		echo "Attempting to log in the enet system"
 		rm -f /tmp/cascookie
 
+		# You may need to modify the following regex for different distros.
 		routerip=$(ifconfig | grep -A 1 "^eth0.2" | grep -P -o "(?<=inet addr:).*(?=  Bcast)")
 		eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=$routerip&wlanacip=$authip"
 		execution=$(curl --silent --cookie-jar /tmp/cascookies -L "$eneturl" | grep -P -o '(?<=name="execution" value=").*(?="/><input type="hidden" name="_eventId)')
