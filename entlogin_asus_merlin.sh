@@ -29,7 +29,7 @@ while [ true ] ; do
 		| grep -o '[^"]\{50,\}')
 
 	curl --silent -output /dev/null \
-      		--cookie /tmp/cascookies --cookie-jar /tmp/cascookies \
+		--cookie /tmp/cascookies --cookie-jar /tmp/cascookies \
 		-H "Content-Type: application/x-www-form-urlencoded" \
 		-H "User-Agent: "${useragent}"" \
 		-L -X POST "${loginurl}" \
