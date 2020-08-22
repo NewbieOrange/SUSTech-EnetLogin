@@ -7,7 +7,6 @@ authip="219.134.142.194"
 username="YOUR_USERNAME_HERE"
 password="YOUR_PASSWORD_HERE"
 interface="eth0"
-curl_interface="eth0"
 
 while [ true ] ; do
 	ret_code=`curl --interface "$interface" -I -s --connect-timeout 3 http://www.baidu.com -w %{http_code} | tail -n1`
