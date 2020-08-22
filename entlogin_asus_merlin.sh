@@ -6,16 +6,17 @@ authip="219.134.142.194"
 # Insert your CAS info below:
 username="YOUR_USER_NAME_HERE"
 password="YOUR_PASSWORD_HERE"
+interface="eth0"
 
 while [ true ] ; do
-  ret_code=$(curl -I -s --connect-timeout 3 http://www.baidu.com -w %{http_code} | tail -n1)
+  ret_code=$(curl --interface "$interface" -I -s --connect-timeout 3 http://www.baidu.com -w %{http_code} | tail -n1)
 
   if [ ${ret_code} -ne 200 ] ; then
 	echo "Attempting to log in the enet system"
 	rm -f /tmp/cascookie
 
 	# You may need to modify the following regex for different versions of firmware.
-	routerip=$(ifconfig |  grep -A 1 "^eth0" | awk '{gsub(/^\s+|\s+$/, "");print}' \
+	routerip=$(ifconfig |  grep -A 1 "^$interface" | awk '{gsub(/^\s+|\s+$/, "");print}' \
 		|  sed -n "2,2p" |  awk -F "[: ]" '{print $3}')
 
 	eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
