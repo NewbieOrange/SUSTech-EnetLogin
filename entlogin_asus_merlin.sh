@@ -23,7 +23,7 @@ while [ true ] ; do
 	eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
 
 	execution=$(curl --silent --cookie-jar /tmp/cascookies \
-	  -H "User-Agent: "${useragent}"" -L "${eneturl}" \
+	  -H "User-Agent: ${useragent}" -L "${eneturl}" \
 	  | grep -o 'execution.*/><input type' | grep -o '[^"]\{50,\}')
     
 	#The above and below commands will execute for a long time
@@ -31,7 +31,7 @@ while [ true ] ; do
 	curl --silent -output /dev/null \
 	  --cookie /tmp/cascookies --cookie-jar /tmp/cascookies \
 	  -H "Content-Type: application/x-www-form-urlencoded" \
-	  -H "User-Agent: "${useragent}"" -L -X POST "${loginurl}" \
+	  -H "User-Agent: ${useragent}" -L -X POST "${loginurl}" \
 	  --data "$(printf "username=%s&password=%s&execution=%s&_eventId=submit&geolocation=" \
 	    ${username} ${password} ${execution})"
   else
