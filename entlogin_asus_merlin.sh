@@ -4,13 +4,12 @@ useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (K
 loginurl="https://cas.sustech.edu.cn/cas/login"
 authip="219.134.142.194"
 # Insert your CAS info below:
-username="YOUR_USER_NAME_HERE"
+username="YOUR_USERNAME_HERE"
 password="YOUR_PASSWORD_HERE"
 interface="eth0"
 
 while [ true ] ; do
-  ret_code=$(curl --interface "${interface}" \
-  -I -s --connect-timeout 3 http://www.baidu.com -w %{http_code} | tail -n1)
+  ret_code=$(curl --interface "${interface}" -I -s --connect-timeout 3 http://www.baidu.com -w %{http_code} | tail -n1)
 
   if [ ${ret_code} -ne 200 ] ; then
 	echo "Attempting to log in the enet system"
@@ -23,20 +22,16 @@ while [ true ] ; do
 
 	eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
 
-	execution=$(curl --silent \
-	  --cookie-jar /tmp/cascookies \
-	  -H "User-Agent: "${useragent}"" \
-	  -L "${eneturl}" \
-	  | grep -o 'execution.*/><input type' \
-      | grep -o '[^"]\{50,\}')
+	execution=$(curl --silent --cookie-jar /tmp/cascookies \
+	  -H "User-Agent: "${useragent}"" -L "${eneturl}" \
+	  | grep -o 'execution.*/><input type' | grep -o '[^"]\{50,\}')
     
 	#The above and below commands will execute for a long time
 
 	curl --silent -output /dev/null \
 	  --cookie /tmp/cascookies --cookie-jar /tmp/cascookies \
-      -H "Content-Type: application/x-www-form-urlencoded" \
-	  -H "User-Agent: "${useragent}"" \
-	  -L -X POST "${loginurl}" \
+	  -H "Content-Type: application/x-www-form-urlencoded" \
+	  -H "User-Agent: "${useragent}"" -L -X POST "${loginurl}" \
 	  --data "$(printf "username=%s&password=%s&execution=%s&_eventId=submit&geolocation=" \
 	    ${username} ${password} ${execution})"
   else
