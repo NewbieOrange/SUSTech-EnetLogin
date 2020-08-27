@@ -21,14 +21,14 @@ while [ true ]; do
         eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
 
         execution=$(curl --silent --cookie-jar /tmp/cascookies \
-            -H "User-Agent: ${useragent}" -L "${eneturl}" |
+            -H "User-Agent: ${useragent}" -k -L "${eneturl}" |
             grep -o 'execution.*/><input type' | grep -o '[^"]\{50,\}')
 
         curl --silent --output /dev/null \
             --cookie /tmp/cascookies --cookie-jar /tmp/cascookies \
             -H "Content-Type: application/x-www-form-urlencoded" \
             -H "User-Agent: ${useragent}" \
-            -L -X POST "${loginurl}" \
+            -k -L -X POST "${loginurl}" \
             --data "username=${username}&password=${password}&execution=${execution}&_eventId=submit&geolocation="
     else
         echo "Connected to Internet, recheck a second later"
