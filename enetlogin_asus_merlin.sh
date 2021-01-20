@@ -15,7 +15,7 @@ while [ true ]; do
         rm -f /tmp/cascookie
 
         # You may need to modify the following regex for different versions of firmware.
-        routerip=$(ifconfig | grep -A 1 "^${interface}" | awk '{gsub(/^\s+|\s+$/, "");print}' |
+        routerip=$(ifconfig | grep -A 1 "^${interface} " | awk '{gsub(/^\s+|\s+$/, "");print}' |
             sed -n "2,2p" | awk -F "[: ]" '{print $3}')
 
         eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"

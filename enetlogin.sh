@@ -15,7 +15,7 @@ while [ true ]; do
         rm -f /tmp/cascookie
 
         # You may need to modify the following regex for different distros / versions of OpenWrt.
-        routerip=$(ifconfig | grep -A 1 "^${interface}" | grep -o "\(inet addr:\).*  Bcast" | grep -o "[0-9\.]*")
+        routerip=$(ifconfig | grep -A 1 "^${interface} " | grep -o "\(inet addr:\).*  Bcast" | grep -o "[0-9\.]*")
 
         eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
 
