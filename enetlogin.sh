@@ -21,7 +21,7 @@ while [ true ]; do
 
         execution=$(curl --silent --cookie-jar /tmp/cascookies \
             -H "User-Agent: ${useragent}" -k -L "${eneturl}" |
-            grep -o 'execution.*/><input type' | grep -o '[^"]\{50,\}')
+            grep -o 'execution.*/><input type' | grep -o '[^"]\{50,\}' | head -n 1)
 
         curl --silent --output /dev/null \
             --cookie /tmp/cascookies --cookie-jar /tmp/cascookies \
