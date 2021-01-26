@@ -18,7 +18,7 @@ while [ true ]; do
         routerip=$(ifconfig | grep -A 1 "^${interface} " | awk '{gsub(/^\s+|\s+$/, "");print}' |
             sed -n "2,2p" | awk -F "[: ]" '{print $3}')
 
-        eneturl="http://125.88.59.131:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
+        eneturl="http://enet.10000.gd.cn:10001/sz/sz112/index.jsp?wlanuserip=${routerip}&wlanacip=${authip}"
 
         execution=$(curl --silent --cookie-jar /tmp/cascookies \
             -H "User-Agent: ${useragent}" -k -L "${eneturl}" |
